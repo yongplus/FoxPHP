@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="images">
+    <file>res/nginx2.png</file>
+    <file>res/nginx.png</file>
+    <file>res/icon_blue.png</file>
+    <file>res/icon_gray.png</file>
+    <file>res/icon.ico</file>
+    <file>res/exit.png</file>
+    <file>res/restart.png</file>
+    <file>res/start.png</file>
+    <file>res/php.png</file>
+  </qresource>
+</RCC>
