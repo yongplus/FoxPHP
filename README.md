@@ -1,6 +1,10 @@
 ### FoxPHP
 
-一个轻量级的PHP8+Nginx环境，下载后安装，运行占用资源少。
+一个轻量级的PHP8+Nginx环境，下载后安装，运行占用资源少。 
+
+
+
+[点击下载](./FoxPHPInstaller.exe?raw=true)
 
 安装后访问：http://localhost/   
 能正常打开并看到FoxPHP字样则表示安装成功  
@@ -18,8 +22,13 @@
 默认启动软件将启动所有服务
 
 ##### Screenshots
+托盘：  
 ![截图](./Screenshots/img2.png)  
+主界面：  
 ![截图](./Screenshots/img1.png)  
+安装访问：  
 ![截图](./Screenshots/img3.png)  
 
+
+软件最初只是自己用的，本人开发用的线上数据库，所以不带MYSQL（这样还能节省本地CPU和内存资源消耗）  
 
