@@ -38,7 +38,6 @@ void Host::enable() {
 
 		QRegularExpression re("^#\\s+?(.*)$", QRegularExpression::MultilineOption);
 		text = text.left(startPos) + range.replace(re, "\\1") + text.right(text.length() - endPos);
-		qDebug() << text;
 	}
 	else {
 		text.append("\n" + beginFlag + "\n"

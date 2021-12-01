@@ -25,7 +25,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>FoxPHP</string>
+   <string>FoxPHP - 健康云</string>
   </property>
   <property name="windowIcon">
    <iconset theme=":/images/res/icon.ico" resource="FoxPHP.qrc">

@@ -84,30 +84,52 @@ void Path::open(Path::Item item) {
 		return;
 	}
 
+
+
 	if (isFile && notepad(path)) {
 		return;
 	}
+
 
 	QUrl url = QUrl("file:///" + path, QUrl::TolerantMode);
 	QDesktopServices::openUrl(url);
 }
 
 bool Path::notepad(const QString& filepath) {
+
+	QStringList _list = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation);
+	QString desktop = "";
+
+	if (_list.length() > 0) {
+		desktop = _list.at(0);
+	}
+
 	QStringList paths;
+
+	paths << "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Notepad++.lnk";
+	paths << "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Notepad++\\Notepad++.lnk";
 	paths << "C:\\Program Files (x86)\\Notepad++\\Notepad++.exe";
 	paths << "C:\\Program Files\\Notepad++\\Notepad++.exe";
 	paths << "C:\\Program Files\\EditPlus\\EditPlus.exe";
 	paths << "C:\\Program Files (x86)\\EditPlus\\EditPlus.exe";
-
-
+	paths << desktop + "/Notepad++.lnk";
+	paths << desktop + "/EditPlus.lnk";
 
 	QString notepad;
 	QListIterator<QString> iterator(paths);
 	while (iterator.hasNext()) {
 		QString _path = iterator.next();
-		if (QFile(_path).exists()) {
-			notepad = _path;
-			break;
+		QFileInfo file(_path);
+		if (file.exists()) {
+			if (file.isShortcut()) {
+				if (QFileInfo(file.symLinkTarget()).exists()) {
+					notepad = file.symLinkTarget();
+				}
+			}
+			else {
+				notepad = _path;
+				break;
+			}
 		}
 	}
 
