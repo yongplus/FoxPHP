@@ -81,4 +81,5 @@ void SystemTray::activeTray(QSystemTrayIcon::ActivationReason reason) {
 
 SystemTray::~SystemTray()
 {
+
 }

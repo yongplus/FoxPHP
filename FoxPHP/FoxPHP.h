@@ -35,7 +35,6 @@ public:
 	Path* path;
 	void closeEvent(QCloseEvent* event);
 	bool nativeEvent(const QByteArray& eventType, void* message, long* result);
-
 private:
 	bool exit;
 	SystemTray* systemTray;

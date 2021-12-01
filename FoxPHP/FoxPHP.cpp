@@ -7,10 +7,11 @@
 #include <QDesktopServices>
 
 FoxPHP::FoxPHP(QWidget* parent)
-	: QMainWindow(parent), exit(false), path(nullptr)
+	: QMainWindow(parent), path(nullptr)
 {
 	ui.setupUi(this);
 	setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
+
 
 	this->regHostKeys();
 
@@ -73,7 +74,6 @@ void FoxPHP::bindEevents() {
 
 
 	connect(this->systemTray, &SystemTray::exit, [=]() {
-		this->exit = true;
 		this->close();
 		});
 
@@ -105,7 +105,7 @@ void FoxPHP::setLabelsText() {
 
 
 void FoxPHP::closeEvent(QCloseEvent* event) {
-	if (!this->exit) {
+	if (event->spontaneous()) {
 		this->hide();
 		event->ignore();
 		return;
@@ -113,7 +113,7 @@ void FoxPHP::closeEvent(QCloseEvent* event) {
 	this->phpcgi->stop();
 	this->nginx->stop();
 	this->systemTray->hide();
-	event->accept();
+	QMainWindow::closeEvent(event);
 }
 
 bool FoxPHP::nativeEvent(const QByteArray& eventType, void* message, long* result)
@@ -175,10 +175,13 @@ void FoxPHP::stateChanged(Service::State state) {
 	}
 }
 
+
+
 FoxPHP::~FoxPHP() {
 	delete this->phpcgi;
 	delete this->nginx;
 	delete this->systemTray;
+
 	//this->nginx->stop(true);
 	//this->phpcgi->stop(true);
 
