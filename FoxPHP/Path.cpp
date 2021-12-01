@@ -6,6 +6,7 @@
 #include <QUrl>
 #include <QDesktopServices>
 #include <qDebug>
+#include <QProcess>
 
 Path::Path(QObject* parent)
 	: QObject(parent)
@@ -61,6 +62,7 @@ QString Path::server() {
 
 void Path::open(Path::Item item) {
 	QString path = NULL;
+	bool isFile = true;
 	if (item == Item::PHP) {
 		path = phpIni();
 	}
@@ -69,6 +71,7 @@ void Path::open(Path::Item item) {
 	}
 	else if (item == Item::APP) {
 		path = app;
+		isFile = false;
 	}
 	else if (item == Item::Server) {
 		path = server();
@@ -80,8 +83,42 @@ void Path::open(Path::Item item) {
 	if (path == NULL) {
 		return;
 	}
+
+	if (isFile && notepad(path)) {
+		return;
+	}
+
 	QUrl url = QUrl("file:///" + path, QUrl::TolerantMode);
 	QDesktopServices::openUrl(url);
+}
+
+bool Path::notepad(const QString& filepath) {
+	QStringList paths;
+	paths << "C:\\Program Files (x86)\\Notepad++\\Notepad++.exe";
+	paths << "C:\\Program Files\\Notepad++\\Notepad++.exe";
+	paths << "C:\\Program Files\\EditPlus\\EditPlus.exe";
+	paths << "C:\\Program Files (x86)\\EditPlus\\EditPlus.exe";
+
+
+
+	QString notepad;
+	QListIterator<QString> iterator(paths);
+	while (iterator.hasNext()) {
+		QString _path = iterator.next();
+		if (QFile(_path).exists()) {
+			notepad = _path;
+			break;
+		}
+	}
+
+	if (notepad.isEmpty()) {
+		return false;
+	}
+	else {
+		QProcess proc;
+		proc.startDetached(notepad, QStringList() << filepath);
+		return true;
+	}
 }
 
 Path::~Path()

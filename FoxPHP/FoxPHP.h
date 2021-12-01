@@ -16,6 +16,7 @@
 #include "Executor.h"
 #include "Host.h"
 #include "Path.h"
+#include "Permanent.h"
 #include "windows.h"
 
 

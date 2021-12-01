@@ -21,6 +21,7 @@ public:
 	QString phpIni();
 	QString ngxConf();
 	QString server();
+	bool notepad(const QString&);
 	~Path();
 	QString app;
 	QString php;

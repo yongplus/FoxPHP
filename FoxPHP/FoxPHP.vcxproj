@@ -99,6 +99,7 @@
     <ClCompile Include="Host.cpp" />
     <ClCompile Include="Nginx.cpp" />
     <ClCompile Include="Path.cpp" />
+    <ClCompile Include="Permanent.cpp" />
     <ClCompile Include="Phpcgi.cpp" />
     <ClCompile Include="Progress.cpp" />
     <ClCompile Include="Service.cpp" />
@@ -122,6 +123,7 @@
     <QtMoc Include="Path.h" />
     <QtMoc Include="SystemTray.h" />
     <QtMoc Include="Console.h" />
+    <QtMoc Include="Permanent.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

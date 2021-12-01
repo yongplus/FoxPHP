@@ -70,6 +70,9 @@
     <ClCompile Include="Host.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Permanent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -110,6 +113,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Host.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Permanent.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

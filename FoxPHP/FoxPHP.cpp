@@ -4,7 +4,7 @@
 #include <QCloseEvent>
 #include <QLabel>
 #include <QTimer>
-
+#include <QDesktopServices>
 
 FoxPHP::FoxPHP(QWidget* parent)
 	: QMainWindow(parent), exit(false), path(nullptr)
@@ -17,13 +17,10 @@ FoxPHP::FoxPHP(QWidget* parent)
 	ui.tabWidget->setCurrentIndex(0);
 	this->systemTray = new SystemTray(this);
 	this->initService();
-	this->bindEevents();
 	this->setLabelsText();
+	this->bindEevents();
 
-	QTimer* timer = new QTimer();
-	timer->setSingleShot(true);
-	connect(timer, SIGNAL(timeout()), this, SLOT(autoLuanch()));
-	timer->start(100);
+
 }
 
 void FoxPHP::initService() {
@@ -67,14 +64,26 @@ void FoxPHP::bindEevents() {
 	connect(ui.serverLabel, &QPushButton::clicked, [=]() {
 		path->open(Path::Item::Server);
 		});
+	connect(ui.autoRunCheckBox, &QCheckBox::stateChanged, [=]() {
+		Permanent(this).setAutoRun(ui.autoRunCheckBox->isChecked());
+		});
 
 	connect(this->phpcgi->service, SIGNAL(stateChanged(Service::State)), this, SLOT(stateChanged(Service::State)));
 	connect(this->nginx->service, SIGNAL(stateChanged(Service::State)), this, SLOT(stateChanged(Service::State)));
+
 
 	connect(this->systemTray, &SystemTray::exit, [=]() {
 		this->exit = true;
 		this->close();
 		});
+
+	if (Permanent(this).isAutoRun()) {
+		ui.autoRunCheckBox->setChecked(true);
+		QTimer* timer = new QTimer();
+		timer->setSingleShot(true);
+		connect(timer, SIGNAL(timeout()), this, SLOT(autoLuanch()));
+		timer->start(100);
+	}
 }
 
 
@@ -89,7 +98,7 @@ void FoxPHP::setLabelsText() {
 	ui.hostLabel->setText(path->host != NULL ? path->host : "未知路径");
 	ui.appLabel->setText(path->app != NULL ? path->app : "未知路径");
 	ui.serverLabel->setText(server != NULL ? server : "未知路径");
-
+	ui.autoRunCheckBox->setChecked(Permanent(this).isAutoRun());
 
 }
 
@@ -155,6 +164,10 @@ void FoxPHP::stateChanged(Service::State state) {
 	bool nginx = this->nginx->service->state == Service::State::RUNNING;
 	if (php || nginx) {
 		this->systemTray->online(php && nginx);
+
+		if (php && nginx && Permanent(this).isFirstRun()) {
+			QDesktopServices::openUrl(QUrl("http://localhost/"));
+		}
 	}
 	else {
 		this->systemTray->offline();
