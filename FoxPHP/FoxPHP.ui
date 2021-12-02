@@ -39,7 +39,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
@@ -170,7 +170,7 @@
                </font>
               </property>
               <property name="text">
-               <string>启动</string>
+               <string>启 动</string>
               </property>
              </widget>
             </item>
@@ -197,7 +197,7 @@
                </font>
               </property>
               <property name="text">
-               <string>停止</string>
+               <string>停 止</string>
               </property>
              </widget>
             </item>
@@ -316,7 +316,7 @@
                </font>
               </property>
               <property name="text">
-               <string>启动</string>
+               <string>启 动</string>
               </property>
              </widget>
             </item>
@@ -343,7 +343,7 @@
                </font>
               </property>
               <property name="text">
-               <string>停止</string>
+               <string>停 止</string>
               </property>
              </widget>
             </item>
@@ -393,12 +393,12 @@
            <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
+           <enum>QSizePolicy::Expanding</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>20</height>
+            <height>0</height>
            </size>
           </property>
          </spacer>
@@ -425,7 +425,7 @@
               <property name="minimumSize">
                <size>
                 <width>120</width>
-                <height>0</height>
+                <height>50</height>
                </size>
               </property>
               <property name="maximumSize">
@@ -462,7 +462,7 @@
               <property name="minimumSize">
                <size>
                 <width>120</width>
-                <height>0</height>
+                <height>50</height>
                </size>
               </property>
               <property name="maximumSize">
@@ -499,6 +499,19 @@
          </layout>
         </item>
         <item>
+         <spacer name="verticalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QLabel" name="label_3">
           <property name="font">
            <font>
@@ -509,6 +522,19 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;HOST操作可以通过以下全局快捷键操作&lt;br/&gt;启用：CTRL+ALT+E&lt;br/&gt;禁用：CTRL+ALT+D&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>

@@ -68,7 +68,7 @@ void SystemTray::activeTray(QSystemTrayIcon::ActivationReason reason) {
 		break;
 	case QSystemTrayIcon::DoubleClick:
 		this->window->activateWindow();
-		this->window->show();
+		this->window->showNormal();
 		break;
 	case QSystemTrayIcon::Trigger:
 		break;
