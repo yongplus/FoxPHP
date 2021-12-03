@@ -132,6 +132,9 @@ bool FoxPHP::nativeEvent(const QByteArray& eventType, void* message, long* resul
 		case  1101:
 			this->host->enable();
 			break;
+		case  1102:
+			this->path->open(Path::Item::Host);
+			break;
 		default:
 			break;
 		}
@@ -148,6 +151,12 @@ void FoxPHP::regHostKeys() {
 	}
 
 	if (!RegisterHotKey(HWND(winId()), 1101, MOD_CONTROL | MOD_ALT, 0x45))
+	{
+		qDebug() << "注册快捷键失败";
+	}
+
+
+	if (!RegisterHotKey(HWND(winId()), 1102, MOD_CONTROL | MOD_ALT, 0x48))
 	{
 		qDebug() << "注册快捷键失败";
 	}

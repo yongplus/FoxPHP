@@ -39,7 +39,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
@@ -519,7 +519,7 @@
            </font>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;HOST操作可以通过以下全局快捷键操作&lt;br/&gt;启用：CTRL+ALT+E&lt;br/&gt;禁用：CTRL+ALT+D&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;HOST操作可以通过以下全局快捷键操作&lt;br/&gt;启用：CTRL+ALT+E&lt;br/&gt;禁用：CTRL+ALT+D&lt;br/&gt;打开HOST文件：CTRL+ALT+H&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -540,7 +540,7 @@
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>配置</string>
+        <string>配 置</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_8">
         <item>
@@ -940,7 +940,7 @@ p, li { white-space: pre-wrap; }
        </size>
       </property>
       <property name="title">
-       <string>日志</string>
+       <string>日 志</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>

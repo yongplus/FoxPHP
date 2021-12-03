@@ -14,7 +14,7 @@ SystemTray::SystemTray(QMainWindow* _window)
 	: QSystemTrayIcon(_window), window(_window)
 {
 
-	this->setToolTip("Fox服务");
+	this->setToolTip("FoxPHP");
 	this->offline();
 	this->initMenu();
 	this->show();
