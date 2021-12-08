@@ -95,8 +95,11 @@ void Path::open(Path::Item item) {
 	QDesktopServices::openUrl(url);
 }
 
-bool Path::notepad(const QString& filepath) {
 
+void Path::findNotepad() {
+	if (!notepadLocal.isEmpty()) {
+		return;
+	}
 	QStringList _list = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation);
 	QString desktop = "";
 
@@ -104,18 +107,22 @@ bool Path::notepad(const QString& filepath) {
 		desktop = _list.at(0);
 	}
 
+
 	QStringList paths;
+
 
 	paths << "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Notepad++.lnk";
 	paths << "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Notepad++\\Notepad++.lnk";
 	paths << "C:\\Program Files (x86)\\Notepad++\\Notepad++.exe";
+	paths << "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Sublime Text.lnk";
 	paths << "C:\\Program Files\\Notepad++\\Notepad++.exe";
 	paths << "C:\\Program Files\\EditPlus\\EditPlus.exe";
 	paths << "C:\\Program Files (x86)\\EditPlus\\EditPlus.exe";
+	paths << "C:\\Program Files\\Sublime Text\\sublime_text.exe";
+	paths << desktop + "/Sublime Text.lnk";
 	paths << desktop + "/Notepad++.lnk";
 	paths << desktop + "/EditPlus.lnk";
 
-	QString notepad;
 	QListIterator<QString> iterator(paths);
 	while (iterator.hasNext()) {
 		QString _path = iterator.next();
@@ -123,22 +130,31 @@ bool Path::notepad(const QString& filepath) {
 		if (file.exists()) {
 			if (file.isShortcut()) {
 				if (QFileInfo(file.symLinkTarget()).exists()) {
-					notepad = file.symLinkTarget();
+					notepadLocal = file.symLinkTarget();
+					break;
 				}
 			}
 			else {
-				notepad = _path;
+				notepadLocal = _path;
 				break;
 			}
 		}
 	}
+	if (notepadLocal.isEmpty()) {
+		notepadLocal = "unknow";
+	}
+}
 
-	if (notepad.isEmpty()) {
+bool Path::notepad(const QString& filepath) {
+
+
+	findNotepad();
+	if (notepadLocal == "unknow") {
 		return false;
 	}
 	else {
 		QProcess proc;
-		proc.startDetached(notepad, QStringList() << filepath);
+		proc.startDetached(notepadLocal, QStringList() << filepath);
 		return true;
 	}
 }

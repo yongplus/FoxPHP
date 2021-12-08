@@ -31,4 +31,8 @@ public:
 public slots:
 	void open(Path::Item);
 
+private:
+	QString notepadLocal;
+	void findNotepad();
+
 };
