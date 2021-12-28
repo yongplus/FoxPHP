@@ -75,6 +75,7 @@ void Phpcgi::start() {
 	}
 
 	console->info("PHP-CGI启动中...");
+	kill(path->php);
 	setState(State::PENDING);
 	progress->start();
 }
@@ -88,6 +89,8 @@ void Phpcgi::stop() {
 	progress->kill();
 	progress->waitForFinished();
 }
+
+
 
 void Phpcgi::check() {
 

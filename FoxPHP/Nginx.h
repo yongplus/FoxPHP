@@ -23,6 +23,5 @@ public slots:
 	void start();
 	void stop();
 	void check();
-	void kill();
 
 };

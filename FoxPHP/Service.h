@@ -20,6 +20,7 @@ public:
 	Service(QObject* parent, Path*);
 	~Service();
 	void setPath(Path*);
+	void Service::kill(const QString&);
 
 public slots:
 	//启动

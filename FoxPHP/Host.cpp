@@ -10,22 +10,47 @@
 #include <qDebug>
 #include <QRegularExpression>
 #include <QMap>
+#include <QFileInfo>
+#include <QDir>
+#include <QEventLoop>
+#include <QDnsLookup>
+#include <QThreadPool>
+#include <QtConcurrent>
+#include "Progress.h"
+
+
+
+
 
 Host::Host(QObject* parent, Console* _console, SystemTray* _systemTray, Path* _path)
-	: QObject(parent), console(_console), systemTray(_systemTray), path(_path)
+	: QObject(parent), console(_console), systemTray(_systemTray), path(_path), pending(false)
 {
 	beginFlag = "#BeginFoxPHP";
 	endFlag = "#EndFoxPHP";
+
+	connect(this, SIGNAL(doEnableSignal()), this, SLOT(doEnable()));
 }
 
 void Host::enable() {
+	if (pending) {
+		return;
+	}
+	QtConcurrent::run(QThreadPool::globalInstance(), [=]() {
+		this->parseNginxDomains();
+		});
+
+	//QtConcurrent::run(this, &Host::parseNginxDomains);
+}
+void Host::doEnable() {
+
+	pending = false;
+
 	QString text = read();
 	if (text == NULL) {
 		return;
 	}
 
 	int startPos = text.indexOf(beginFlag);
-	qDebug() << startPos;
 	if (startPos > -1) {
 		int endPos = text.indexOf(endFlag, startPos);
 		if (endPos == -1) {
@@ -52,9 +77,6 @@ void Host::enable() {
 	if (write(text)) {
 		tip("启用host成功");
 	}
-
-
-
 }
 
 void Host::disable() {
@@ -87,8 +109,8 @@ void Host::disable() {
 		tip("未检测到相关host", true);
 	}
 
-
 }
+
 
 QString Host::read() {
 	QFile file(path->host);
@@ -173,6 +195,134 @@ QString Host::comment(QString text, QString range, bool isStrip) {
 	}
 	lines.clear();
 	return lines2.join("\n");
+
+}
+
+
+void Host::parseNginxDomains() {
+	QString vhost = QFileInfo(path->nginx).absoluteDir().path() + "/conf/conf.d/vhost.conf";
+	QFile file(vhost);
+	if (!file.exists()) {
+		tip("启用HOST失败，HOST文件不存在~！", true);
+		pending = false;
+		return;
+	}
+
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+		tip("打开host文件出错！" + file.errorString(), true);
+		pending = false;
+		return;
+	}
+
+	QString conf = file.readAll();
+
+	QStringList addrs;
+	int offset = 0;
+	QString servername = "server_name";
+	QString listen = "listen";
+	QRegularExpression reg("\\s+|	");
+
+	while (true) {
+		QString port = "80";
+
+		//解析端口
+		int start = conf.indexOf(listen, offset);
+		if (start != -1) {
+			start += listen.length();
+			int end = conf.indexOf(";", start);
+			if (end != -1) {
+
+				QString seg = conf.left(end).right(end - start).trimmed();
+				qDebug() << "listen" << seg;
+				QStringList listenItem = seg.split(reg);
+				if (listenItem.length() > 0 && listenItem.at(0).toInt() > 0) {
+					port = listenItem.at(0);
+				}
+			}
+		}
+
+		//解析server_name
+		start = conf.indexOf(servername, offset);
+		if (start == -1) {
+			break;
+		}
+		start += servername.length();
+
+		offset = start;
+
+		int end = conf.indexOf(";", offset);
+		if (end == -1) {
+			break;
+		}
+		offset = end;
+
+		QString seg = conf.left(end).right(end - start).trimmed();
+		QStringList domains = seg.split(reg);
+
+		for (int i = 0; i < domains.length(); i++) {
+			QEventLoop loop;
+			QDnsLookup dns(QDnsLookup::A, domains[i]);
+			connect(&dns, SIGNAL(finished()), &loop, SLOT(quit()));
+			dns.lookup();
+			loop.exec();
+			if (dns.hostAddressRecords().length() == 0) {
+				continue;
+			}
+			qDebug() << "string" << domains[i] << dns.hostAddressRecords().at(0).value().toString();
+			QString ip = dns.hostAddressRecords().at(0).value().toString();
+			loop.deleteLater();
+			dns.deleteLater();
+			QString addr = QString("%1:%2").arg(ip, port);
+			if (ip != "127.0.0.1" && addrs.contains(addr) == false) {
+				addrs << addr;
+			}
+		}
+	}
+	file.close();
+
+	emit doEnableSignal();
+
+	for (int i = 0; i < addrs.length(); i++) {
+		closeKeepAlive(addrs[i]);
+	}
+
+}
+void Host::closeKeepAlive(QString& addr) {
+
+	QStringList arr = addr.split(":");
+	qDebug() << "addr" << addr;
+	QStringList params;
+	// /close <Local Address> <Local Port> <Remote Address> <Remote Port> {Process Name/ID}
+	params << "/close" << "*" << "*" << arr[0] << arr[1];
+
+	Progress cmd;
+	cmd.start(QString("%1/%2").arg(path->app, "cports.exe"), params);
+	cmd.waitForFinished();
+	cmd.kill();
+
+	/*
+	qDebug() << "addr" << addr;
+	QStringList params;
+	params << "/c" << "netstat" << "-nao" << "|" << "findstr" << addr;
+
+	Progress cmd;
+	cmd.start("cmd.exe", params);
+	cmd.waitForFinished();
+
+	QByteArray bytes = cmd.readAllStandardOutput();
+	QStringList lines = QString(bytes).split("\r\n");
+	for (int i = 0; i < lines.length(); i++) {
+		QString pid = lines[i].split("     ").last();
+		if (pid.isEmpty() == false) {
+			qDebug() << "pid" << pid;
+			params.clear();
+			params << "/c" << "taskkill" << "-f" << "-pid" << pid;
+			Progress killer;
+			killer.start("cmd.exe", params);
+			killer.waitForFinished();
+		}
+	}
+	*/
 
 }
 

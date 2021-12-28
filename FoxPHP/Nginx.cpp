@@ -74,24 +74,20 @@ void Nginx::start() {
 		return;
 	}
 
+
+
 	console->info("Nginx启动中...");
-	kill(); //启动前先kill之前的进程
+	kill(path->nginx); //启动前先kill之前的进程
 	setState(State::PENDING);
 	progress->start();
 
 }
 
 
-void Nginx::kill() {
-	QString filename = QFileInfo(path->nginx).fileName();
-	QStringList params;
-	params << "/c" << "taskkill" << "-f" << "-im" << filename;
-	Progress killer;
-	killer.start("cmd.exe", params);
-	killer.waitForFinished();
-	killer.close();
 
-}
+
+
+
 
 
 void Nginx::stop() {
