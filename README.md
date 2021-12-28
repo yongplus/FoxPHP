@@ -25,11 +25,11 @@
 
 ##### Screenshots
 托盘：  
-![截图](./Screenshots/img2.png)  
+<img src="./Screenshots/img2.png" />
 主界面：  
-![截图](./Screenshots/img1.png)  
+<img src="./Screenshots/img1.png" width="584px" />
 安装访问：  
-![截图](./Screenshots/img3.png)  
+<img src="./Screenshots/img3.png" width="578px" />
 
 ##### 集成扩展
 ```cli
