@@ -25,9 +25,9 @@
 
 ##### Screenshots
 托盘：  
-<img src="./Screenshots/img2.png" />
+<img src="./Screenshots/img2.png" />  
 主界面：  
-<img src="./Screenshots/img1.png" width="584px" />
+<img src="./Screenshots/img1.png" width="584px" />  
 安装访问：  
 <img src="./Screenshots/img3.png" width="578px" />
 
