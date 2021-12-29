@@ -10,6 +10,8 @@
 
 #include "Executor.h"
 #include <qDebug>
+#include <QEvent>
+#include <QApplication>
 
 Executor::Executor(QObject* parent, Service* _service, QPushButton* _btnLaunch, QPushButton* _btnStop)
 	: QObject(parent), service(_service)
@@ -43,6 +45,9 @@ void Executor::stateChanged(Service::State state) {
 
 	if (state == Service::State::PENDING) {
 		btnLaunch->setDisabled(true);
+		//QEvent* leaveEvent = new QEvent(QEvent::Leave);
+		//QApplication::sendEvent(btnLaunch, leaveEvent);
+		btnLaunch->setAttribute(Qt::WA_UnderMouse, false);
 	}
 	else if (state == Service::State::RUNNING) {
 		btnStop->setDisabled(false);
@@ -50,6 +55,7 @@ void Executor::stateChanged(Service::State state) {
 	else {
 		btnLaunch->setDisabled(false);
 		btnStop->setDisabled(true);
+		btnStop->setAttribute(Qt::WA_UnderMouse, false);
 	}
 }
 

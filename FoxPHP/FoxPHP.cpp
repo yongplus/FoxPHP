@@ -21,7 +21,6 @@ FoxPHP::FoxPHP(QWidget* parent)
 	this->setLabelsText();
 	this->bindEevents();
 
-
 }
 
 void FoxPHP::initService() {
