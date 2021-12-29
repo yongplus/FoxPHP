@@ -39,7 +39,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
@@ -585,6 +585,9 @@
                 <family>微软雅黑</family>
                </font>
               </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
               <property name="styleSheet">
                <string notr="true">border:0;
 border-bottom-width: 1px;
@@ -638,6 +641,9 @@ text-align:left;</string>
                <font>
                 <family>微软雅黑</family>
                </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
                <string notr="true">border:0;
@@ -693,6 +699,9 @@ text-align:left;</string>
                 <family>微软雅黑</family>
                </font>
               </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
               <property name="styleSheet">
                <string notr="true">border:0;
 border-bottom-width: 1px;
@@ -747,6 +756,9 @@ text-align:left;</string>
                 <family>微软雅黑</family>
                </font>
               </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
               <property name="styleSheet">
                <string notr="true">border:0;
 border-bottom-width: 1px;
@@ -800,6 +812,9 @@ text-align:left;</string>
                <font>
                 <family>微软雅黑</family>
                </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
                <string notr="true">border:0;
