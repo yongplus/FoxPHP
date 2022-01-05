@@ -63,11 +63,14 @@
          <height>16777215</height>
         </size>
        </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="tabShape">
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab_3">
         <attribute name="title">
@@ -197,6 +200,9 @@
                  <family>微软雅黑</family>
                 </font>
                </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
+               </property>
                <property name="text">
                 <string>启 动</string>
                </property>
@@ -223,6 +229,9 @@
                 <font>
                  <family>微软雅黑</family>
                 </font>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
                </property>
                <property name="text">
                 <string>停 止</string>
@@ -343,6 +352,9 @@
                  <family>微软雅黑</family>
                 </font>
                </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
+               </property>
                <property name="text">
                 <string>启 动</string>
                </property>
@@ -369,6 +381,9 @@
                 <font>
                  <family>微软雅黑</family>
                 </font>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
                </property>
                <property name="text">
                 <string>停 止</string>
@@ -467,6 +482,9 @@
                  <family>微软雅黑</family>
                 </font>
                </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
+               </property>
                <property name="text">
                 <string>启用HOST</string>
                </property>
@@ -503,6 +521,9 @@
                 <font>
                  <family>微软雅黑</family>
                 </font>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::NoFocus</enum>
                </property>
                <property name="text">
                 <string>禁用HOST</string>
@@ -616,6 +637,9 @@
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
+               </property>
                <property name="styleSheet">
                 <string notr="true">border:0;
 border-bottom-width: 1px;
@@ -672,6 +696,9 @@ text-align:left;</string>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
                </property>
                <property name="styleSheet">
                 <string notr="true">border:0;
@@ -730,6 +757,9 @@ text-align:left;</string>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
+               </property>
                <property name="styleSheet">
                 <string notr="true">border:0;
 border-bottom-width: 1px;
@@ -786,6 +816,9 @@ text-align:left;</string>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
                </property>
                <property name="styleSheet">
                 <string notr="true">border:0;
@@ -844,6 +877,9 @@ text-align:left;</string>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
+               </property>
                <property name="styleSheet">
                 <string notr="true">border:0;
 border-bottom-width: 1px;
@@ -893,6 +929,9 @@ text-align:left;</string>
              </item>
              <item>
               <widget class="QCheckBox" name="autoRunCheckBox">
+               <property name="focusPolicy">
+                <enum>Qt::NoFocus</enum>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -996,6 +1035,9 @@ p, li { white-space: pre-wrap; }
            <font>
             <family>微软雅黑</family>
            </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
           </property>
           <property name="styleSheet">
            <string notr="true">line-height:20px;</string>
