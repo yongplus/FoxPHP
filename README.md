@@ -1,7 +1,8 @@
 ### FoxPHP
 
-A lightweight PHP development enviroment built on Nginx+PHP8 for windows, Can be run directly after intallation without any third-party enviroment or dependence.  
-一个轻量级的Nginx+PHP8环境，下载后安装即可运行，运行占用资源少。 
+一个轻量级的Nginx+PHP8环境，下载后安装即可运行，运行占用资源少。  
+A lightweight PHP development environment built on Nginx+PHP8 for windows, Can be run directly after installation without any third-party environment or dependencies.  
+
 
 [Clicking here to download](./FoxPHPInstaller.exe?raw=true)
 
