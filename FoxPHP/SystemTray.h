@@ -12,6 +12,7 @@ public:
 	~SystemTray();
 	void online(bool);
 	void offline();
+
 private:
 	QMainWindow* window;
 	void initMenu();

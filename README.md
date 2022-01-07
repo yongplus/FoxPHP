@@ -1,14 +1,13 @@
 ### FoxPHP
 
+A lightweight PHP development enviroment built on Nginx+PHP8 for windows, Can be run directly after intallation without any third-party enviroment or dependence.  
 一个轻量级的Nginx+PHP8环境，下载后安装即可运行，运行占用资源少。 
 
+[Clicking here to download](./FoxPHPInstaller.exe?raw=true)
 
 
-[点击下载](./FoxPHPInstaller.exe?raw=true)
-
-安装后访问：http://localhost/   
-能正常打开并看到FoxPHP字样则表示安装成功  
-查看PHPINFO: http://localhost/phpinfo.php
+  
+Check phpinfo: http://localhost/phpinfo.php
 
 ##### HOST用法
 本地开发，线上数据库，将数据库服务器IP改为host连接，并绑定IP这样既可实现在公司电脑上是外网IP，线上服务器上用内网IP，另外对于小程序有域名限制，切到开发域名上容易忘记改，可以将线上域名绑定HOST，通过快捷键快速切换域名走本地。  

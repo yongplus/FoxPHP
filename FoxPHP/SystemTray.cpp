@@ -8,6 +8,7 @@
 
 #include "SystemTray.h"
 #include <QMenu>
+#include <QDebug>
 #include <QAction>
 
 SystemTray::SystemTray(QMainWindow* _window)
@@ -54,9 +55,6 @@ void SystemTray::initMenu() {
 		emit exit();
 		});
 	this->setContextMenu(menu);
-	QObject::connect(menu, &QMenu::aboutToShow, [=]() {
-		menu->activateWindow();
-		});
 }
 
 void SystemTray::activeTray(QSystemTrayIcon::ActivationReason reason) {
@@ -65,6 +63,7 @@ void SystemTray::activeTray(QSystemTrayIcon::ActivationReason reason) {
 	case QSystemTrayIcon::Unknown:
 		break;
 	case QSystemTrayIcon::Context:
+		this->contextMenu()->activateWindow();
 		break;
 	case QSystemTrayIcon::DoubleClick:
 		this->window->activateWindow();
@@ -77,7 +76,11 @@ void SystemTray::activeTray(QSystemTrayIcon::ActivationReason reason) {
 	default:
 		break;
 	}
+
 }
+
+
+
 
 SystemTray::~SystemTray()
 {
