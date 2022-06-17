@@ -16,8 +16,6 @@ public:
 	~Nginx();
 
 private:
-	Console* console;
-	Progress* progress;
 	bool init();
 public slots:
 	void start();

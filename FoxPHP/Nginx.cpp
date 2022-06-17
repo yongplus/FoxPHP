@@ -14,7 +14,7 @@
 #include <QTimer>
 
 Nginx::Nginx(QObject* parent, Console* _console, Path* _path)
-	: Service(parent, _path), console(_console), progress(nullptr)
+	: Service(parent, _path, _console)
 {
 
 }

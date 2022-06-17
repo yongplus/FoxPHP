@@ -17,8 +17,6 @@ public:
 	~Phpcgi();
 
 private:
-	Console* console;
-	Progress* progress;
 	bool init();
 public slots:
 	void stop();

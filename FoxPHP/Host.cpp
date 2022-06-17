@@ -281,7 +281,7 @@ void Host::parseNginxDomains() {
 	file.close();
 
 	emit doEnableSignal();
-
+	qDebug() << "len" << addrs.length();
 	for (int i = 0; i < addrs.length(); i++) {
 		closeKeepAlive(addrs[i]);
 	}
@@ -293,8 +293,9 @@ void Host::closeKeepAlive(QString& addr) {
 	qDebug() << "addr" << addr;
 	QStringList params;
 	// /close <Local Address> <Local Port> <Remote Address> <Remote Port> {Process Name/ID}
-	params << "/close" << "*" << "*" << arr[0] << arr[1];
 
+	params << "/close" << "*" << "*" << arr[0] << arr[1];
+	qDebug() << "close " << params;
 	Progress cmd;
 	cmd.start(QString("%1/%2").arg(path->app, "cports.exe"), params);
 	cmd.waitForFinished();

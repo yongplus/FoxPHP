@@ -2,6 +2,8 @@
 
 #include <QObject>
 #include "Path.h"
+#include "Console.h"
+#include "Progress.h"
 
 class Service : public QObject
 {
@@ -17,8 +19,9 @@ public:
 	};
 
 	State state;
-	Service(QObject* parent, Path*);
+	Service(QObject* parent, Path*, Console*);
 	~Service();
+
 	void setPath(Path*);
 	void Service::kill(const QString&);
 
@@ -28,8 +31,11 @@ public slots:
 	//停止
 	virtual void stop() = 0;
 	void setState(State);
+	void portOwner(int);
 
 protected:
+	Console* console;
+	Progress* progress;
 	virtual bool init() = 0;
 	Path* path;
 signals:

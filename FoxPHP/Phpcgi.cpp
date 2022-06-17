@@ -15,7 +15,7 @@
 
 
 Phpcgi::Phpcgi(QObject* parent, Console* _console, Path* _path)
-	: Service(parent, _path), console(_console), progress(nullptr)
+	: Service(parent, _path, _console)
 {
 
 
@@ -62,6 +62,10 @@ bool Phpcgi::init() {
 		else if (exitCode == -1) {
 			QString error(progress->readAllStandardError());
 			console->error(QString("启动PHP-CGI错误：\n%1").arg(error));
+			if (error.contains("Couldn't create FastCGI listen socket on port")) {
+				portOwner(9000);
+			}
+
 		}
 		setState(State::STOP);
 		});
