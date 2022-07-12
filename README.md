@@ -4,7 +4,7 @@
 A lightweight PHP development environment built on Nginx+PHP8 for windows, Can be run directly after installation without any third-party environment or dependencies.  
 
 
-[Click here to download](/yongplus/FoxPHP/releases)
+[Click here to download](./releases)
 
 
   
