@@ -3,16 +3,14 @@
 一个轻量级的Nginx+PHP8环境，下载后安装即可运行。  
 A lightweight PHP development environment built on Nginx+PHP8 for windows, Can be run directly after installation without any third-party environment or dependencies.  
 
+该软件适用于本地开发，线上数据库，带HOST管理功能，支持快捷键切换，也是本人每天日常工作在使用的开发环境；  
+将项目中的数据库配置host，在本地走服务器外网，在服务器上走内网IP，同时通过绑定线上域名host为127.0.0.1省去配置开发域名，通过快捷键快速切换线上与本地；  
+切换的host需要配置在#BeginFoxPHP 到 #EndFoxPHP区间(初次使用，在软件中切换一次host管理会自动创建标识)。  
 
 [Click here to download](https://github.com/yongplus/FoxPHP/releases)
-
-
   
 Check phpinfo: http://localhost/phpinfo.php
 
-##### HOST用法
-本地开发，线上数据库，将数据库服务器IP改为host连接，并绑定IP这样既可实现在公司电脑上是外网IP，线上服务器上用内网IP，另外对于小程序有域名限制，切到开发域名上容易忘记改，可以将线上域名绑定HOST，通过快捷键快速切换域名走本地。  
-软件将会操作#BeginFoxPHP 到 #EndFoxPHP区间的host配置
 
 
 ##### 统托盘Icon颜色  
