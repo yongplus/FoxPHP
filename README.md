@@ -3,7 +3,7 @@
 一个轻量级的Nginx+PHP8环境，下载后安装即可运行。  
 A lightweight PHP development environment built on Nginx+PHP8 for windows, Can be run directly after installation without any third-party environment or dependencies.  
 
-该软件适用于本地开发，线上数据库，带HOST管理功能，支持快捷键切换，也是本人每天日常工作在使用的开发环境；  
+该软件适用于本地开发，线上数据库，带HOST管理功能，支持快捷键切换，也是本人和项目小组每天日常工作在使用的开发环境；  
 将项目中的数据库配置host，在本地走服务器外网，在服务器上走内网IP，同时通过绑定线上域名host为127.0.0.1省去配置开发域名，通过快捷键快速切换线上与本地；  
 切换的host需要配置在#BeginFoxPHP 到 #EndFoxPHP区间(初次使用，在软件中切换一次host管理会自动创建标识)。  
 
