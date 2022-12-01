@@ -56,6 +56,7 @@ bool Phpcgi::init() {
 
 	connect(progress, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), [=](int exitCode, QProcess::ExitStatus exitStatus) {
 		qDebug() << exitCode << exitStatus;
+
 		if (exitCode == 0 || exitCode == 62097 || state == State::RUNNING) {
 			console->info("PHP-CGI停止成功!");
 		}
@@ -68,6 +69,10 @@ bool Phpcgi::init() {
 
 		}
 		setState(State::STOP);
+		//处理请求数达到500时，cgi自动退出问题
+		if (exitCode == 0 || exitStatus == QProcess::NormalExit) {
+			this->start();
+		}
 		});
 	return true;
 }

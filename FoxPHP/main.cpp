@@ -8,8 +8,9 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	QFont f("Helvetica", 9);
-	a.setFont(f);
+	QFont font("NSimSun");
+	font.setPixelSize(12);
+	a.setFont(font);
 
 	FoxPHP w;
 	a.setSingleMainWindow(&w);
